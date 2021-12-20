@@ -6,9 +6,19 @@ let equalButton = document.querySelector("[data-equals]");
 let previousOperandText = document.querySelector("[data-previous-operand]");
 let currentOperandText = document.querySelector("[data-current-operand]");
 
+let currentOperationType; // store ops type // struckchure
+
 allClearButton.addEventListener("click", () => {
   currentOperandText.innerText = "";
   previousOperandText.innerText = "";
+});
+
+deleteButton.addEventListener("click", () => {
+  let current = currentOperandText.innerText.slice(0, -1);
+  if (currentOperandText.innerText === "") {
+    previousOperandText.innerText = currentOperandText.innerText;
+  }
+  currentOperandText.innerText = current;
 });
 
 //loops throughs each data-number and assigns i
@@ -29,6 +39,9 @@ for (let i = 0; i < operationButton.length; i++) {
   //add eventlistener to each valur[i]
   operationButton[i].addEventListener("click", () => {
     let currentOperation = operationButton[i].innerText;
+
+    currentOperationType = operationButton[i].innerText; // struckchure
+
     if (currentOperandText.innerText === "") return;
     if (previousOperandText.innerText !== "") {
       compute(currentOperation);
@@ -43,24 +56,15 @@ for (let i = 0; i < operationButton.length; i++) {
 
 equalButton.addEventListener("click", () => {
   for (let i = 0; i < operationButton.length; i++) {
-    console.log(operationButton[i].innerText);
-
-    compute(operationButton[i].innerText);
+    compute(currentOperationType); // struckchure
   }
-});
-
-deleteButton.addEventListener("click", () => {
-  let current = currentOperandText.innerText.slice(0, -1);
-  if (currentOperandText.innerText === "") {
-    previousOperandText.innerText = currentOperandText.innerText;
-  }
-  currentOperandText.innerText = current;
 });
 
 function compute(operator) {
   let computation;
   let previousValue = parseFloat(previousOperandText.innerText);
   let currentValue = parseFloat(currentOperandText.innerText);
+
   if (isNaN(previousValue) || isNaN(currentValue)) return;
 
   // computation = previousValue + currentValue
@@ -68,53 +72,28 @@ function compute(operator) {
   // console.log(pickedOperator);
   // console.log(operationButton[i].innerText);
 
-  switch (operator) {
+  console.log(`current operator is ${currentOperationType}`); // struckchure
+
+  switch (
+    currentOperationType // struckchure
+  ) {
     case "+":
       computation = previousValue + currentValue;
       break;
-
     case "-":
       computation = previousValue - currentValue;
       break;
-
     case "*":
       computation = previousValue * currentValue;
       break;
-
     case "/":
       computation = previousValue / currentValue;
       break;
-
     default:
       return;
   }
+
   currentOperandText.innerText = computation;
   previousOperandText.innerText = "";
   // pickedOperator = undefined;
-  console.log(operator);
-  console.log(computation);
 }
-
-//     switch(pickedOperator) {
-//         case '+':
-//         computation = previousValue + currentValue
-//         break;
-
-//         case '-':
-//         computation = previousValue - currentValue
-//         break;
-
-//         case "*":
-//         computation = previousValue * currentValue
-//         break;
-
-//         case "/":
-//         computation = previousValue / currentValue
-//         break;
-
-//         default:
-//             return
-//     }
-
-//  currentOperandText.innerText = computation
-//  previousOperandText.innerText = "";
