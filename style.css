@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Readex+Pro:wght@200;300&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,300;1,400&display=swap');
+body { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient( to right, #00aaff, #00ff6c);
+    font-family: Roboto, 'Times New Roman', Times, serif;
+}
+
+.calculator-grid{
+    display: grid;
+    min-height: 100vh;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: repeat(7, 90px);
+}
+
+.span-2{
+    grid-column: span 2;
+}
+.span-4{
+    grid-column: span 4;
+}
+
+.calculator-grid > button{
+    font-size: 1.8rem;
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, .75);
+}
+
+.calculator-grid > button:hover{
+    background-color: rgba(255, 255, 255, .9)
+}
+
+.output{
+    grid-column: 1/-1;
+    background-color: rgba(0, 0, 0, .75);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    font-size: 1.5rem;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.previous-operand{
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, .75);
+}
+.current-operand{
+    font-size: 2.5rem;
+    color: #fff;
+}
